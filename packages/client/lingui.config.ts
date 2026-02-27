@@ -13,6 +13,7 @@ const supressWarningIfWereNotInLinguiExtract = !(
 export default defineConfig({
   sourceLocale: "en",
   locales: Object.values(Languages).map(({ i18n }) => i18n),
+  compileNamespace: "es", // <--- ADD THIS LINE
   catalogs: [
     {
       path: "<rootDir>/components/i18n/catalogs/{locale}/messages",

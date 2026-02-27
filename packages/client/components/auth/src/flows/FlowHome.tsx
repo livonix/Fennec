@@ -9,7 +9,7 @@ import { Navigate } from "@revolt/routing";
 import { Button, Column } from "@revolt/ui";
 
 import { useState } from "@revolt/state";
-import Wordmark from "../../../../public/assets/web/wordmark.svg?component-solid";
+import Wordmark from "../../../../src/assets/web/wordmark.svg?component-solid";
 
 /**
  * Flow for logging into an account
@@ -58,7 +58,7 @@ export default function FlowHome() {
               </b>
               <span style={{ "text-align": "center", opacity: "0.5" }}>
                 <Trans>
-                  Stoat is one of the best ways to stay connected with your
+                  Fennec is one of the best ways to stay connected with your
                   friends and community, anywhere, anytime.
                 </Trans>
               </span>

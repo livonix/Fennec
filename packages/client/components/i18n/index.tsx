@@ -4,7 +4,9 @@ import { I18nProvider as LinguiProvider } from "@lingui-solid/solid";
 import { i18n } from "@lingui/core";
 
 import { type LocaleOptions, Language, Languages } from "./Languages";
-import { messages as en } from "./catalogs/en/messages";
+import * as enCatalog from "./catalogs/en/messages.js";
+
+const en: Record<string, unknown> = (enCatalog as any).messages;
 import { initTime, loadTimeLocale } from "./dayjs";
 
 export function I18nProvider(props: { children: JSX.Element }) {
@@ -22,12 +24,13 @@ export async function loadAndSwitchLocale(
   if (key !== i18n.locale) {
     const data =
       Languages[key].i18n === "en"
-        ? en
-        : (await import(`./catalogs/${Languages[key].i18n}/messages.ts`))
-            .messages;
+        ? (en as any)
+        : await import(`./catalogs/${Languages[key].i18n}/messages.js`).then(
+            (m: any) => m.messages,
+          );
 
     i18n.load({
-      [key]: data,
+      [key]: data as any,
     });
 
     i18n.activate(key);
@@ -64,7 +67,7 @@ export function browserPreferredLanguage() {
  */
 export function initI18n() {
   i18n.load({
-    en,
+    en: en as any,
   });
 
   i18n.activate("en");
